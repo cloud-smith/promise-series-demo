@@ -15,3 +15,18 @@ it('should run array series', async () => {
     "task-3": "Task Success",
   });
 });
+
+it('should test array series error handling', async () => {
+  expect.assertions(1);
+  try {
+    await promiseSeries({
+      tasks: [
+        () => dummyTask({ delay: 100 }),
+        () => dummyTask({ delay: 100, shouldFail: true }),
+        () => dummyTask({ delay: 100 }),
+      ],
+    });
+  } catch (error) {
+    expect(error).toStrictEqual("Task Failed");
+  }
+});

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContents } from './useContents';
-import { Row, Column, UL, LI, Link } from '../styles/FlexStyles';
+import { Row, Column, UL, LI, Link } from '../../styles/FlexStyles';
 
 export const App = () => {
   const {
@@ -11,13 +11,13 @@ export const App = () => {
     <Row>
       <UL style={{padding:'1em'}}>
         <LI>
-          <Link onClick={() => setPage('welcome')}>
-            Welcome
+          <Link onClick={() => setPage('array-series')}>
+            Array Series
           </Link>
         </LI>
         <LI>
-          <Link onClick={() => setPage('array-series')}>
-            Array Series
+          <Link onClick={() => setPage('named-series')}>
+            Named Series
           </Link>
         </LI>
       </UL>
