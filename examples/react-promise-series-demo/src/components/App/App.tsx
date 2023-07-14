@@ -35,6 +35,11 @@ export const App = () => {
             Task State
           </Link>
         </LI>
+        <LI>
+          <Link onClick={() => setPage('task-state')}>
+            Custom Logger
+          </Link>
+        </LI>
       </UL>
       <Column style={{padding:'1em'}}>
         {content}

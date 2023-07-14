@@ -5,6 +5,7 @@ import {
   MixedArrays,
   PromiseState,
   TaskState,
+  CustomLogger,
 } from '../../examples';
 
 export const contents: any = {
@@ -13,4 +14,5 @@ export const contents: any = {
   'mixed-arrays': () => <MixedArrays />,
   'promise-state': () => <PromiseState />,
   'task-state': () => <TaskState />,
+  'custom-logger': () => <CustomLogger />,
 };
