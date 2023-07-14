@@ -4,6 +4,7 @@ import {
   NamedSeries,
   MixedArrays,
   PromiseState,
+  TaskState,
 } from '../../examples';
 
 export const contents: any = {
@@ -11,4 +12,5 @@ export const contents: any = {
   'named-series': () => <NamedSeries />,
   'mixed-arrays': () => <MixedArrays />,
   'promise-state': () => <PromiseState />,
+  'task-state': () => <TaskState />,
 };

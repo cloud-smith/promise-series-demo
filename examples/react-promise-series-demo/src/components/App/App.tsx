@@ -30,6 +30,11 @@ export const App = () => {
             Promise State
           </Link>
         </LI>
+        <LI>
+          <Link onClick={() => setPage('task-state')}>
+            Task State
+          </Link>
+        </LI>
       </UL>
       <Column style={{padding:'1em'}}>
         {content}
