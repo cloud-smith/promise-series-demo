@@ -25,6 +25,11 @@ export const App = () => {
             Mixed Arrays
           </Link>
         </LI>
+        <LI>
+          <Link onClick={() => setPage('promise-state')}>
+            Promise State
+          </Link>
+        </LI>
       </UL>
       <Column style={{padding:'1em'}}>
         {content}
