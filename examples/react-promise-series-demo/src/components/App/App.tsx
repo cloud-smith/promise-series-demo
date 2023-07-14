@@ -20,6 +20,11 @@ export const App = () => {
             Named Series
           </Link>
         </LI>
+        <LI>
+          <Link onClick={() => setPage('mixed-arrays')}>
+            Mixed Arrays
+          </Link>
+        </LI>
       </UL>
       <Column style={{padding:'1em'}}>
         {content}
