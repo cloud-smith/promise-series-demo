@@ -19,7 +19,9 @@ export const MixedArrays = () => {
 		() => dummyTask({ delay }),
 		() => dummyTask({ delay }),
     () => {
-      console.log('non-async task testing');
+      const results = 'Task Success';
+      console.log(results);
+      return results;
     },
 	];
 
@@ -33,7 +35,7 @@ export const MixedArrays = () => {
 
   return (
     <Column style={{ flex: 1, display: 'block' }}>
-      <h1>Array Series</h1>
+      <h1>Mixed Arrays</h1>
 
       <Column style={{ paddingTop: '1em', paddingBottom: '1em' }}>
         <p>Task Name: {String(state.taskName)}</p>

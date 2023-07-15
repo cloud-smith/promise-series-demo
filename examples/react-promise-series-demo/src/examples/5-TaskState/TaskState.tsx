@@ -30,7 +30,7 @@ export const TaskState = () => {
 
   return (
     <Column style={{ flex: 1, display: 'block' }}>
-      <h1>Array Series</h1>
+      <h1>Task State</h1>
 
       <Column style={{ paddingTop: '1em', paddingBottom: '1em' }}>
         <p>Task Name: {String(state.taskName)}</p>

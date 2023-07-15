@@ -1,48 +1,47 @@
-import React from 'react';
-import { useContents } from './useContents';
+import React, { useState } from 'react';
 import { Row, Column, UL, LI, Link } from '../../styles/FlexStyles';
 
+import {
+  ArraySeries,
+  NamedSeries,
+  MixedArrays,
+  PromiseState,
+  TaskState,
+} from '../../examples';
+
+const contents: any = {
+  'array-series': { label: 'Array Series', component: <ArraySeries /> },
+  'named-series': { label: 'Named Series', component: <NamedSeries /> },
+  'mixed-arrays': { label: 'Mixed Arrays', component: <MixedArrays /> },
+  'promise-state': { label: 'Promise State', component: <PromiseState /> },
+  'task-state': { label: 'Task State', component: <TaskState /> },
+};
+
 export const App = () => {
-  const {
-    content,
-    setPage,
-  } = useContents();
+  const [state, setState] = useState({
+    screenName: 'array-series',
+  });
+
+  const handleScreenChange = (screenName: string) =>
+    setState({ screenName });
+
+  const screen = contents[state.screenName].component;
+
+  const navigation = Object.keys(contents).map((item, index) => (
+    <LI key={index}>
+      <Link onClick={() => handleScreenChange(item)}>
+        {contents[item].label}
+      </Link>
+    </LI>
+  ));
+
   return (
     <Row>
       <UL style={{padding:'1em'}}>
-        <LI>
-          <Link onClick={() => setPage('array-series')}>
-            Array Series
-          </Link>
-        </LI>
-        <LI>
-          <Link onClick={() => setPage('named-series')}>
-            Named Series
-          </Link>
-        </LI>
-        <LI>
-          <Link onClick={() => setPage('mixed-arrays')}>
-            Mixed Arrays
-          </Link>
-        </LI>
-        <LI>
-          <Link onClick={() => setPage('promise-state')}>
-            Promise State
-          </Link>
-        </LI>
-        <LI>
-          <Link onClick={() => setPage('task-state')}>
-            Task State
-          </Link>
-        </LI>
-        <LI>
-          <Link onClick={() => setPage('task-state')}>
-            Custom Logger
-          </Link>
-        </LI>
+        {navigation}
       </UL>
       <Column style={{padding:'1em'}}>
-        {content}
+        {screen}
       </Column>
     </Row>
   );
