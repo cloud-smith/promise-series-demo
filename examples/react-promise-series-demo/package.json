@@ -1,6 +1,6 @@
 {
   "name": "react-promise-series-demo",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@cloud-smith/promise-series": "file:../../../promise-series/cloud-smith-promise-series-0.2.2.tgz",
