@@ -20,7 +20,7 @@ import {
 } from './examples';
 
 export const App = () => {
-  const [screenName, setScreenName] = useState('introduction');
+  const [screenName, setScreenName] = useState('rollbacks');
 
   const screens: any = {
     'introduction': <Introduction />,
