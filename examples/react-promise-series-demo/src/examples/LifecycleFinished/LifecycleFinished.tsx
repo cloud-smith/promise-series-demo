@@ -3,7 +3,7 @@ import { promiseSeries, dummyTask, SeriesStateUpdate } from '../../promiseSeries
 import { Column, Button } from '../../styles/FlexStyles';
 
 export const LifecycleFinished = () => {
-  const [state, onStateChange] = useState<SeriesStateUpdate>({
+  const [state, onStateChange] = useState<any>({
     taskIndex: 0,
     taskName: '',
     taskLabel: '',

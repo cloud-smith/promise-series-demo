@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { promiseSeries, dummyTask, SeriesStateUpdate } from '../../promiseSeries';
+import { promiseSeries, dummyTask } from '../../promiseSeries';
 import { Column, Button } from '../../styles/FlexStyles';
 
 export const ConfigLogger = () => {
-  const [state, onStateChange] = useState<SeriesStateUpdate>({
+  const [state, onStateChange] = useState<any>({
     taskIndex: 0,
     taskName: '',
     taskLabel: '',

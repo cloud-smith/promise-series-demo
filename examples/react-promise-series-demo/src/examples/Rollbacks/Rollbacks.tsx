@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { promiseSeries, dummyTask, SeriesStateUpdate } from '../../promiseSeries';
+import { promiseSeries, dummyTask } from '../../promiseSeries';
 import { Column, Button, UL, LI } from '../../styles/FlexStyles';
 
 const useRollbacks = () => {
-  const [state, onStateChange] = useState<SeriesStateUpdate>({
+  const [state, onStateChange] = useState<any>({
     taskIndex: 0,
     taskName: '',
     taskLabel: '',
