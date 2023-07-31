@@ -1,5 +1,4 @@
-import { promiseSeries } from '@cloud-smith/promise-series';
-import { dummyTask } from '../../promiseSeries/dummyTask';
+import { promiseSeries, dummyTask } from '../../libs/promiseSeries';
 
 it('should run mixed task types using an array', async () => {
   const results = await promiseSeries({

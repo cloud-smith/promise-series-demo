@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { promiseSeries, dummyTask } from '../../promiseSeries';
+import { promiseSeries, dummyTask } from '../../libs/promiseSeries';
 import { Column, Button } from '../../styles/FlexStyles';
 
 export const ConfigLogger = () => {
@@ -14,9 +14,8 @@ export const ConfigLogger = () => {
 
   const delay = 500;
 
-  const useLogger = (log: any) => {
+  const useLogger = (log: any) =>
     console.log('CUSTOM-LOGGER ', log);
-  };
 
   const handleSimulateSuccess = async () =>
     await promiseSeries({

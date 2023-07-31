@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { promiseSeries, dummyTask, SeriesTaskWrapper } from '../../libs/promiseSeries';
 import { Column, Button, UL, LI } from '../../styles/FlexStyles';
 
-export const TasksObjectMixed = () => {
+export const Timeouts = () => {
   const defaultState = {
     results: [],
     error: null,
@@ -11,6 +11,8 @@ export const TasksObjectMixed = () => {
   const [state, setState] = useState<any>(defaultState);
 
   const delay = 500;
+
+  const timeout = 1000;
 
   const onSuccess = (results: SeriesTaskWrapper[]) =>
     setState({
@@ -32,16 +34,11 @@ export const TasksObjectMixed = () => {
   const handleTasksSuccessfully = async () => {
     handleReset();
     await promiseSeries({
-      tasks: {
-        getApples: () => dummyTask({ delay }),
-        getOrganges: () => dummyTask({ delay }),
-        myFunction: () => {
-          const results = 'Task Success';
-          console.log(results);
-          return results;
-        },
-        getGrapes: () => dummyTask({ delay }),
-      },
+      tasks: [
+        () => dummyTask({ delay }),
+        () => dummyTask({ delay }),
+        () => dummyTask({ delay }),
+      ],
     })
     .then(onSuccess)
     .catch(onError);
@@ -50,16 +47,12 @@ export const TasksObjectMixed = () => {
   const handleTasksWithFailure = async () => {
     handleReset();
     await promiseSeries({
-      tasks: {
-        getApples: () => dummyTask({ delay }),
-        getOrganges: () => dummyTask({ delay }),
-        myFunction: () => {
-          const results = 'Task Success';
-          console.log(results);
-          return results;
-        },
-        getGrapes: () => dummyTask({ delay, shouldFail: true }),
-      },
+      timeout,
+      tasks: [
+        () => dummyTask({ delay }),
+        () => dummyTask({ delay: 1500 }),
+        () => dummyTask({ delay }),
+      ],
     })
     .then(onSuccess)
     .catch(onError);
@@ -67,7 +60,7 @@ export const TasksObjectMixed = () => {
 
   return (
     <Column style={{ flex: 1, display: 'block' }}>
-      <h1>Object of functions and promises</h1>
+      <h1>Timeouts</h1>
       <ul style={{ display:'flex', listStyle:'none', margin:'1em 0' }}>
         <li style={{ marginRight:'0.5em' }}>
           <Button onClick={handleTasksSuccessfully}>

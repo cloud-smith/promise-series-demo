@@ -1,62 +1,94 @@
 import React, { useState } from 'react';
-import { promiseSeries, dummyTask, SeriesStateUpdate } from '../../promiseSeries';
-import { Column, Button } from '../../styles/FlexStyles';
+import { promiseSeries, dummyTask, SeriesTaskWrapper, SeriesHookProps } from '../../libs/promiseSeries';
+import { Column, Button, UL, LI } from '../../styles/FlexStyles';
 
 export const LifecycleFinished = () => {
-  const [state, onStateChange] = useState<any>({
-    taskIndex: 0,
-    taskName: '',
-    taskLabel: '',
-    isRunning: false,
-    isComplete: false,
-    tasks: [],
-  });
+  const defaultState = {
+    results: [],
+    error: null,
+  };
+
+  const [state, setState] = useState<any>(defaultState);
 
   const delay = 500;
 
-  const onFinished = (update: SeriesStateUpdate) => {
-    console.log('onFinished state: ', update);
+  const onFinish = (tasks: SeriesHookProps) =>
+    console.log('onFinish: ', tasks);
+
+  const onSuccess = (results: SeriesTaskWrapper[]) =>
+    setState({
+      error: null,
+      results,
+    });
+  
+  const onError = (error: any) =>
+    setState({
+      results: [],
+      error
+    });
+
+  const handleReset = () => {
+    console.clear();
+    setState(defaultState);
   };
 
-  const handleSimulateSuccess = async () =>
+  const handleTasksSuccessfully = async () => {
+    handleReset();
     await promiseSeries({
       tasks: [
         () => dummyTask({ delay }),
         () => dummyTask({ delay }),
         () => dummyTask({ delay }),
       ],
-      onStateChange,
-      onFinished,
+      onFinish,
     })
-      .then(console.log)
-      .catch(console.error);
+    .then(onSuccess)
+    .catch(onError);
+  };
 
-  const handleSimulateFailure = async () =>
+  const handleTasksWithFailure = async () => {
+    handleReset();
     await promiseSeries({
       tasks: [
         () => dummyTask({ delay }),
         () => dummyTask({ delay, shouldFail: true }),
         () => dummyTask({ delay }),
       ],
-      onStateChange,
+      onFinish,
     })
-      .then(console.log)
-      .catch(console.error);
+    .then(onSuccess)
+    .catch(onError);
+  };
 
   return (
     <Column style={{ flex: 1, display: 'block' }}>
-      <h1>Lifecycle onFinished</h1>
+      <h1>Lifecycle onFinish</h1>
       <ul style={{ display:'flex', listStyle:'none', margin:'1em 0' }}>
-        <li style={{ marginRight:'0.5em' }}><Button onClick={handleSimulateSuccess}>Simulate Success</Button></li>
-        <li><Button onClick={handleSimulateFailure}>Simulate Failure</Button></li>
+        <li style={{ marginRight:'0.5em' }}>
+          <Button onClick={handleTasksSuccessfully}>
+            Simulate Success
+          </Button>
+        </li>
+        <li>
+          <Button onClick={handleTasksWithFailure}>
+            Simulate Failure
+          </Button>
+        </li>
       </ul>
       <Column>
-        <p>isRunning: {String(state.isRunning)}</p>
-        <p>isComplete: {String(state.isComplete)}</p>
-        <p>Index: {JSON.stringify(state.taskIndex)}</p>
-        <p>Name: {String(state.taskName)}</p>
-        <p>Label: {String(state.taskLabel)}</p>
-        <p>Results: {JSON.stringify(state.tasks)}</p>
+        {state.results.length ? (
+          <>
+            <p>Results:</p>
+            <UL>
+              {state.results.map((item: any, index: number) => (
+                <LI key={index}>{JSON.stringify(item)}</LI>
+              ))}
+            </UL>
+          </>
+        ) : <></>}
+        {state.error && (
+          <p>Error: {JSON.stringify(state.error)}</p>
+        )}
       </Column>
     </Column>
   );

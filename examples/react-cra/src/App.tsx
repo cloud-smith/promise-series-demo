@@ -7,7 +7,6 @@ import {
   TasksArrayMixed,
   TasksObject,
   TasksObjectMixed,
-  TaskState,
   PromiseState,
   LifecycleStarting,
   LifecycleTaskStart,
@@ -17,10 +16,11 @@ import {
   Rollbacks,
   ConfigLogging,
   ConfigLogger,
+  Timeouts,
 } from './examples';
 
 export const App = () => {
-  const [screenName, setScreenName] = useState('rollbacks');
+  const [screenName, setScreenName] = useState('introduction');
 
   const screens: any = {
     'introduction': <Introduction />,
@@ -28,7 +28,6 @@ export const App = () => {
     'tasks-array-mixed': <TasksArrayMixed />,
     'tasks-object': <TasksObject />,
     'tasks-object-mixed': <TasksObjectMixed />,
-    'task-state': <TaskState />,
     'promise-state': <PromiseState />,
     'lifecycle-starting': <LifecycleStarting />,
     'lifecycle-task-start': <LifecycleTaskStart />,
@@ -38,6 +37,7 @@ export const App = () => {
     'rollbacks': <Rollbacks />,
     'config-logging': <ConfigLogging />,
     'config-logger': <ConfigLogger />,
+    'timeouts': <Timeouts />,
   };
 
   return (
@@ -78,13 +78,8 @@ export const App = () => {
             State
             <UL style={{ paddingLeft: '0.5em'}}>
               <LI>
-                <Link onClick={() => setScreenName('task-state')}>
-                  Task State
-                </Link>
-              </LI>
-              <LI>
                 <Link onClick={() => setScreenName('promise-state')}>
-                  Promise State
+                  onStageChage
                 </Link>
               </LI>
             </UL>
@@ -120,11 +115,16 @@ export const App = () => {
             </UL>
           </LI>
           <LI style={{ paddingTop:'1em' }}>
-            Rolling Back
+            Misc Features
             <UL style={{ paddingLeft: '0.5em'}}>
               <LI>
                 <Link onClick={() => setScreenName('rollbacks')}>
                   Rollbacks
+                </Link>
+              </LI>
+              <LI>
+                <Link onClick={() => setScreenName('timeouts')}>
+                  Timeouts
                 </Link>
               </LI>
             </UL>

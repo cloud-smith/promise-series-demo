@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { promiseSeries, dummyTask } from '../../promiseSeries';
+import { promiseSeries, dummyTask } from '../../libs/promiseSeries';
 import { Column, Button } from '../../styles/FlexStyles';
 
 export const ConfigLogging = () => {
