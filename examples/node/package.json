@@ -41,6 +41,6 @@
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "@cloud-smith/promise-series": "^2.0.5"
+    "@cloud-smith/promise-series": "^2.0.6"
   }
 }

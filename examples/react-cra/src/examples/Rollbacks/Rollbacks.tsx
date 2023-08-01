@@ -8,7 +8,7 @@ export const Rollbacks = () => {
     error: null,
     basket: {
       apples: 0,
-      organges: 0,
+      oranges: 0,
       grapes: 0,
     },
   };
@@ -17,41 +17,41 @@ export const Rollbacks = () => {
 
   const delay = 500;
 
-  const getTasks = ({ shouldFail }: { shouldFail: boolean }) => [
-    async () => await dummyTask({ delay })
+  const getTasks = ({ shouldFail }: { shouldFail?: boolean }) => ({
+    getApples: async () => await dummyTask({ delay })
       .then(results => {
         handleUpdateBasket({ apples: 1 });
         return results;
       }),
-    async () => await dummyTask({ delay, shouldFail })
+    getOranges: async () => await dummyTask({ delay, shouldFail })
       .then(results => {
-        handleUpdateBasket({ organges: 1 });
+        handleUpdateBasket({ oranges: 1 });
         return results;
       }),
-    async () => await dummyTask({ delay })
+    getGrapes: async () => await dummyTask({ delay })
       .then(results => {
         handleUpdateBasket({ grapes: 1 });
         return results;
       }),
-  ];
+  });
 
-  const rollbacks = [
-    async () => await dummyTask({ delay })
+  const rollbacks = {
+    getApples: async () => await dummyTask({ delay })
       .then(results => {
         handleUpdateBasket({ apples: 0 });
         return results;
       }),
-    async () => await dummyTask({ delay })
+    getOranges: async () => await dummyTask({ delay })
       .then(results => {
-        handleUpdateBasket({ organges: 0 });
+        handleUpdateBasket({ oranges: 0 });
         return results;
       }),
-    async () => await dummyTask({ delay })
+    getGrapes: async () => await dummyTask({ delay })
       .then(results => {
         handleUpdateBasket({ grapes: 0 });
         return results;
       }),
-  ];
+  };
 
   const onSuccess = (results: SeriesTaskWrapper[]) => {
     console.log(results);
@@ -88,7 +88,7 @@ export const Rollbacks = () => {
   const handleTasksSuccessfully = async () => {
     handleReset();
     await promiseSeries({
-      tasks: getTasks({ shouldFail: false }),
+      tasks: getTasks({}),
       rollbacks,
     })
     .then(onSuccess)
