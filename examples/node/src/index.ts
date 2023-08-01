@@ -11,7 +11,7 @@ const examples = {
 (async () => {
 
   const example = {
-    name: 'tasks-object',
+    name: 'tasks-array',
     props: {
       delay: 500,
       shouldFail: false,
