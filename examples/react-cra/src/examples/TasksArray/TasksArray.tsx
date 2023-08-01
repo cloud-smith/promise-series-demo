@@ -12,17 +12,21 @@ export const TasksArray = () => {
 
   const delay = 500;
 
-  const onSuccess = (results: SeriesTaskWrapper[]) =>
+  const onSuccess = (results: SeriesTaskWrapper[]) => {
+    console.log(results);
     setState({
       error: null,
       results,
     });
-  
-  const onError = (error: any) =>
+  };
+
+  const onError = (error: any) => {
+    console.error(error);
     setState({
       results: [],
       error
     });
+  };
 
   const handleReset = () => {
     console.clear();
