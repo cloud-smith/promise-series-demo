@@ -17,6 +17,7 @@ import {
   ConfigLogging,
   ConfigLogger,
   Timeouts,
+  TaskState,
 } from './examples';
 
 export const App = () => {
@@ -38,6 +39,7 @@ export const App = () => {
     'config-logging': <ConfigLogging />,
     'config-logger': <ConfigLogger />,
     'timeouts': <Timeouts />,
+    'task-state': <TaskState />,
   };
 
   return (
@@ -80,6 +82,11 @@ export const App = () => {
               <LI>
                 <Link onClick={() => setScreenName('promise-state')}>
                   onStageChage
+                </Link>
+              </LI>
+              <LI>
+                <Link onClick={() => setScreenName('task-state')}>
+                  Task State
                 </Link>
               </LI>
             </UL>
