@@ -53,15 +53,17 @@ export const Rollbacks = () => {
       }),
   ];
 
-  const onSuccess = (results: SeriesTaskWrapper[]) =>
+  const onSuccess = (results: SeriesTaskWrapper[]) => {
+    console.log(results);
     setState({
       ...state,
       error: null,
       results,
     });
+  };
   
   const onError = (error: any) => {
-    console.log('error status: ', error);
+    console.error(error);
     setState({
       ...state,
       results: [],
