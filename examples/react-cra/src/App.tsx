@@ -1,47 +1,54 @@
 import React, { useState } from 'react';
 import { Row, Column, UL, LI, Link } from './styles/FlexStyles';
 
-import {
-  Introduction,
-  TasksArray,
-  TasksArrayMixed,
-  TasksObject,
-  TasksObjectMixed,
-  PromiseState,
-  LifecycleStarting,
-  LifecycleTaskStart,
-  LifecycleTaskComplete,
-  LifecycleTaskFailed,
-  LifecycleFinished,
-  Rollbacks,
-  ConfigLogging,
-  ConfigLogger,
-  Timeouts,
-  TaskState,
-  PromiseUntilDemo
-} from './examples';
+import * as Examples from './examples';
 
 export const App = () => {
-  const [screenName, setScreenName] = useState('introduction');
-
   const screens: any = {
-    'introduction': <Introduction />,
-    'tasks-array': <TasksArray />,
-    'tasks-array-mixed': <TasksArrayMixed />,
-    'tasks-object': <TasksObject />,
-    'tasks-object-mixed': <TasksObjectMixed />,
-    'promise-state': <PromiseState />,
-    'lifecycle-starting': <LifecycleStarting />,
-    'lifecycle-task-start': <LifecycleTaskStart />,
-    'lifecycle-task-complete': <LifecycleTaskComplete />,
-    'lifecycle-task-failed': <LifecycleTaskFailed />,
-    'lifecycle-finished': <LifecycleFinished />,
-    'rollbacks': <Rollbacks />,
-    'config-logging': <ConfigLogging />,
-    'config-logger': <ConfigLogger />,
-    'timeouts': <Timeouts />,
-    'task-state': <TaskState />,
-    'promise-until': <PromiseUntilDemo />,
+    default: 'Introduction',
+    config: [
+      'ConfigLogging',
+      'ConfigLogger',
+      'ConfigForceRollbacks',
+      'ConfigForceParallelRollbacks',
+    ],
+    features: [
+      'Rollbacks',
+      'Timeouts',
+      'PromiseUntil',
+      'FindTask',
+      'FindRollback',
+    ],
+    formats: [
+      'TasksArray',
+      'TasksArrayMixed',
+      'TasksObject',
+      'TasksObjectMixed',
+    ],
+    lifecycle: [
+      'LifecycleStarting',
+      'LifecycleTaskStart',
+      'LifecycleTaskComplete',
+      'LifecycleTaskFailed',
+      'LifecycleFinished',
+    ],
+    state: [
+      'PromiseState',
+      'TaskState',
+    ],
+  };
+
+  const [screenName, setScreenName] = useState(screens.default);
+  const Screen = (Examples as any)[screenName];
+
+  const getMenuItems = (menuName: string) => {
+    return screens[menuName].map((item: any, index: number) => (
+      <LI key={index}>
+        <Link onClick={() => setScreenName(item)}>
+          {item}
+        </Link>
+      </LI>
+    ))
   };
 
   return (
@@ -49,119 +56,44 @@ export const App = () => {
       <div style={{ minWidth:'5em', padding:'1em' }}>
         <UL style={{ paddingTop:0 }}>
           <LI>
-            <Link onClick={() => setScreenName('introduction')}>
+            <Link onClick={() => setScreenName('Introduction')}>
               Introduction
             </Link>
           </LI>
           <LI style={{ paddingTop:'1em' }}>
             Task Formats
             <UL style={{ paddingLeft: '0.5em'}}>
-              <LI>
-                <Link onClick={() => setScreenName('tasks-array')}>
-                  Array of promises
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('tasks-array-mixed')}>
-                  Array of functions and promises
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('tasks-object')}>
-                  Object of promises
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('tasks-object-mixed')}>
-                  Object of functions and promises
-                </Link>
-              </LI>
+              {getMenuItems('formats')}
             </UL>
           </LI>
           <LI style={{ paddingTop:'1em' }}>
             State
             <UL style={{ paddingLeft: '0.5em'}}>
-              <LI>
-                <Link onClick={() => setScreenName('promise-state')}>
-                  onStageChage
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('task-state')}>
-                  Task State
-                </Link>
-              </LI>
+            {getMenuItems('state')}
             </UL>
           </LI>
           <LI style={{ paddingTop:'1em' }}>
             Lifecycle Events
             <UL style={{ paddingLeft: '0.5em'}}>
-              <LI>
-                <Link onClick={() => setScreenName('lifecycle-starting')}>
-                  onStarting
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('lifecycle-task-start')}>
-                  onTaskStart
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('lifecycle-task-complete')}>
-                  onTaskComplete
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('lifecycle-task-failed')}>
-                  onTaskFailed
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('lifecycle-finished')}>
-                  onFinished
-                </Link>
-              </LI>
+              {getMenuItems('lifecycle')}
             </UL>
           </LI>
           <LI style={{ paddingTop:'1em' }}>
             Misc Features
             <UL style={{ paddingLeft: '0.5em'}}>
-              <LI>
-                <Link onClick={() => setScreenName('rollbacks')}>
-                  Rollbacks
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('timeouts')}>
-                  Timeouts
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('promise-until')}>
-                  Promise Until
-                </Link>
-              </LI>
+              {getMenuItems('features')}
             </UL>
           </LI>
           <LI style={{ paddingTop:'1em' }}>
             Configuration
             <UL style={{ paddingLeft: '0.5em'}}>
-              <LI>
-                <Link onClick={() => setScreenName('config-logging')}>
-                  useLogging
-                </Link>
-              </LI>
-              <LI>
-                <Link onClick={() => setScreenName('config-logger')}>
-                  useLogger
-                </Link>
-              </LI>
+              {getMenuItems('config')}
             </UL>
           </LI>
         </UL>
       </div>
       <Column style={{ flex: 6, padding:'1em' }}>
-        { screens[screenName] }
+        <Screen />
       </Column>
     </Row>
   );
