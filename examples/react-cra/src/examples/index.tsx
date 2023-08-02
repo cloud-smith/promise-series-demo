@@ -14,3 +14,4 @@ export * from './ConfigLogging';
 export * from './ConfigLogger';
 export * from './Timeouts';
 export * from './TaskState';
+export * from './PromiseUntil';

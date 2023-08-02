@@ -18,6 +18,7 @@ import {
   ConfigLogger,
   Timeouts,
   TaskState,
+  PromiseUntilDemo
 } from './examples';
 
 export const App = () => {
@@ -40,6 +41,7 @@ export const App = () => {
     'config-logger': <ConfigLogger />,
     'timeouts': <Timeouts />,
     'task-state': <TaskState />,
+    'promise-until': <PromiseUntilDemo />,
   };
 
   return (
@@ -132,6 +134,11 @@ export const App = () => {
               <LI>
                 <Link onClick={() => setScreenName('timeouts')}>
                   Timeouts
+                </Link>
+              </LI>
+              <LI>
+                <Link onClick={() => setScreenName('promise-until')}>
+                  Promise Until
                 </Link>
               </LI>
             </UL>
