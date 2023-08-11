@@ -1,2 +1,2 @@
-// export * from '@cloud-smith/promise-series';
-export * from './src';
+export * from '@cloud-smith/promise-series';
+// export * from './src';
